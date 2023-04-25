@@ -97,8 +97,8 @@ static const Layout layouts[] = {
 	{ MODKEY|ShiftMask,             KEY,      tag,            {.ui = 1 << TAG} }, \
 	{ MODKEY|ControlMask|ShiftMask, KEY,      toggletag,      {.ui = 1 << TAG} },
 #define STACKKEYS(MOD,ACTION) \
-	{ MOD,	XK_j,	ACTION##stack,	{.i = INC(+1) } }, \
-	{ MOD,	XK_k,	ACTION##stack,	{.i = INC(-1) } }, \
+	{ MOD,	XK_h,	ACTION##stack,	{.i = INC(+1) } }, \
+	{ MOD,	XK_l,	ACTION##stack,	{.i = INC(-1) } }, \
 	{ MOD,  XK_v,   ACTION##stack,  {.i = 0 } }, \
 
 /* helper for spawning shell commands in the pre dwm-5.0 fashion */
@@ -152,26 +152,26 @@ static const Key keys[] = {
 	TAGKEYS(XK_9,8)
 	{ MODKEY, XK_0,view,{.ui = ~0 } },
 	{ MODKEY|ShiftMask,XK_0,tag,{.ui = ~0 } },
-
 	{ MODKEY,XK_Tab,view,{0} },
-	{ MODKEY,XK_grave,shiftview,	{ .i = -1 } },
+	{ MODKEY,XK_grave,shiftview,	{ .i = +1 } },
 	{ MODKEY,XK_q,killclient,	{0} },
+  { MODKEY|ControlMask,XK_Delete,quit,{0} },
+
+
 	{ MODKEY,XK_c,spawn,{.v = (const char*[]){ BROWSER, NULL } } },
 	{ MODKEY,XK_e,spawn,SHCMD(TERMINAL " -e neomutt ") },
 	{ MODKEY,XK_E,spawn,SHCMD(TERMINAL " -e abook -C ~/.config/abook/abookrc --datafile ~/.config/abook/addressbook") },
 	{ MODKEY,XK_t,setlayout,{.v = &layouts[0]} }, /* tile */
-	{ MODKEY,XK_T,setlayout,{.v = &layouts[1]} }, /* bstack */
+	// { MODKEY,XK_T,setlayout,{.v = &layouts[1]} }, /* bstack */
 	// { MODKEY,XK_y,setlayout,	{.v = &layouts[2]} }, /* spiral */
 	// { MODKEY,XK_Y,setlayout,	{.v = &layouts[3]} }, /* dwindle */
-	{ MODKEY,XK_u,setlayout,{.v = &layouts[4]} }, /* deck */
-	{ MODKEY,XK_U,setlayout,{.v = &layouts[5]} }, /* monocle */
-	{ MODKEY,XK_i,setlayout,{.v = &layouts[6]} }, /* centeredmaster */
-	{ MODKEY,XK_I,setlayout,{.v = &layouts[7]} }, /* centeredfloatingmaster */
+	// { MODKEY,XK_u,setlayout,{.v = &layouts[4]} }, /* deck */
+	// { MODKEY,XK_U,setlayout,{.v = &layouts[5]} }, /* monocle */
+	// { MODKEY,XK_i,setlayout,{.v = &layouts[6]} }, /* centeredmaster */
+	// { MODKEY,XK_I,setlayout,{.v = &layouts[7]} }, /* centeredfloatingmaster */
 	{ MODKEY,XK_a,togglegaps,	{0} },
 	{ MODKEY,XK_d,spawn,{.v = (const char*[]){ "dmenu_run", NULL } } },
 	{ MODKEY,XK_f,togglefullscr,{0} },
-	{ MODKEY,XK_h,setmfact,{.f = -0.05} },
-	{ MODKEY,XK_l,setmfact,{.f = +0.05} },
 	{ MODKEY,XK_Return,	spawn,{.v = termcmd } },
 	{ MODKEY,XK_b,togglebar,{0} },
 	{ MODKEY,XK_n,spawn,{.v = (const char*[]){ TERMINAL, "-e", "nvim", NULL } } },
@@ -190,9 +190,13 @@ static const Key keys[] = {
 	{ MODKEY,XK_F10,spawn,{.v = (const char*[]){ "unmounter", NULL } } },
 	{ MODKEY,XK_F11,spawn,SHCMD("mpv --untimed --no-cache --no-osc --no-input-default-bindings --profile=low-latency --input-conf=/dev/null --title=webcam $(ls /dev/video[0,2,4,6,8] | tail -n 1)") },
 	{ MODKEY,XK_F12,		spawn,		SHCMD("remaps") },
+
+
+	{ MODKEY,XK_Left,setmfact,{.f = -0.05} },
+	{ MODKEY,XK_Right,setmfact,{.f = +0.05} },
 	{ MODKEY,XK_BackSpace,		spawn,		{.v = (const char*[]){ TERMINAL, "-e", "htop", NULL } } },
 	{ MODKEY,XK_space,	zoom,		{0} },
-	{ MODKEY|ShiftMask,		XK_space,	togglefloating,	{0} },
+	// { MODKEY|ShiftMask,		XK_space,	togglefloating,	{0} },
 	{ 0,XK_Print,	spawn,		SHCMD("maim -s ~/Pictures/$(date +%s).png") },
 	{ MODKEY,XK_Print,	spawn,		SHCMD( "maim -s | xclip -selection clipboard -t image/png") },
 	{ MODKEY,XK_Scroll_Lock,	spawn,		SHCMD("killall screenkey || screenkey &") },
